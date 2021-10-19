@@ -1,0 +1,31 @@
+<div class="field">
+    <label class="label">{{ label }}</label>
+    <div class="control">
+        <input 
+            class="input" 
+            [formControl]="control"
+            [ngClass]="{ 'is-danger': showErrors() }"/>
+    </div>
+    <ng-container *ngIf="showErrors()">
+        <div class="help is-danger" *ngIf="control.errors.required">
+            Value is required.
+        </div>
+
+        <div class="help is-danger" *ngIf="control.errors.minlength">
+            Ingresaste {{ control.errors.minlength.actualLength}}
+            caracter, este campo debe de tener
+            {{ control.errors.minlength.requiredLength }} campos
+        </div>
+
+        <div class="help is-danger" *ngIf="control.errors.maxlength">
+            El numero de caracteres que ingresaste
+            {{ control.errors.maxlength.actualLength }}
+            es mayor a los caracteres permitidos, te sobran
+            {{ control.errors.maxlength.actualLength - control.errors.maxlength.requiredLength }}
+        </div>
+        <div class="help is-danger" *ngIf="control.errors.pattern">
+            Formato no valido
+        </div>
+    </ng-container>
+
+</div>
